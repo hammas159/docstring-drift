@@ -1,0 +1,796 @@
+{
+  "numpy": {
+    "stats": {
+      "files": 407,
+      "functions": 11215,
+      "with_param_docs": 761,
+      "phantom": 8,
+      "undocumented": 258
+    },
+    "phantom": [
+      {
+        "file": "_utils\\__init__.py",
+        "line": 41,
+        "function": "_rename_parameter",
+        "kind": "phantom",
+        "name": "new_name"
+      },
+      {
+        "file": "lib\\_npyio_impl.py",
+        "line": 1735,
+        "function": "genfromtxt",
+        "kind": "phantom",
+        "name": "missing"
+      },
+      {
+        "file": "lib\\_npyio_impl.py",
+        "line": 1735,
+        "function": "genfromtxt",
+        "kind": "phantom",
+        "name": "skiprows"
+      },
+      {
+        "file": "lib\\recfunctions.py",
+        "line": 1274,
+        "function": "require_fields",
+        "kind": "phantom",
+        "name": "a"
+      },
+      {
+        "file": "ma\\core.py",
+        "line": 5788,
+        "function": "sort",
+        "kind": "phantom",
+        "name": "a"
+      },
+      {
+        "file": "ma\\core.py",
+        "line": 6186,
+        "function": "take",
+        "kind": "phantom",
+        "name": "a"
+      },
+      {
+        "file": "ma\\extras.py",
+        "line": 955,
+        "function": "compress_rows",
+        "kind": "phantom",
+        "name": "x"
+      },
+      {
+        "file": "ma\\extras.py",
+        "line": 994,
+        "function": "compress_cols",
+        "kind": "phantom",
+        "name": "x"
+      }
+    ]
+  },
+  "pandas": {
+    "stats": {
+      "files": 1421,
+      "functions": 28295,
+      "with_param_docs": 1653,
+      "phantom": 40,
+      "undocumented": 187
+    },
+    "phantom": [
+      {
+        "file": "_testing\\_io.py",
+        "line": 29,
+        "function": "round_trip_pickle",
+        "kind": "phantom",
+        "name": "path"
+      },
+      {
+        "file": "_testing\\_io.py",
+        "line": 49,
+        "function": "round_trip_pathlib",
+        "kind": "phantom",
+        "name": "path"
+      },
+      {
+        "file": "conftest.py",
+        "line": 1167,
+        "function": "datapath",
+        "kind": "phantom",
+        "name": "path"
+      },
+      {
+        "file": "core\\algorithms.py",
+        "line": 1320,
+        "function": "diff",
+        "kind": "phantom",
+        "name": "stacklevel"
+      },
+      {
+        "file": "core\\arrays\\sparse\\array.py",
+        "line": 1890,
+        "function": "_make_sparse",
+        "kind": "phantom",
+        "name": "copy"
+      },
+      {
+        "file": "core\\computation\\engines.py",
+        "line": 99,
+        "function": "_evaluate",
+        "kind": "phantom",
+        "name": "env"
+      },
+      {
+        "file": "core\\dtypes\\missing.py",
+        "line": 223,
+        "function": "_isna_array",
+        "kind": "phantom",
+        "name": "obj"
+      },
+      {
+        "file": "core\\groupby\\groupby.py",
+        "line": 6167,
+        "function": "get_groupby",
+        "kind": "phantom",
+        "name": "exclusions"
+      },
+      {
+        "file": "core\\groupby\\groupby.py",
+        "line": 6167,
+        "function": "get_groupby",
+        "kind": "phantom",
+        "name": "groupings"
+      },
+      {
+        "file": "core\\groupby\\groupby.py",
+        "line": 6167,
+        "function": "get_groupby",
+        "kind": "phantom",
+        "name": "level"
+      },
+      {
+        "file": "core\\groupby\\groupby.py",
+        "line": 6167,
+        "function": "get_groupby",
+        "kind": "phantom",
+        "name": "name"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 72,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "win_type"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 72,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "window_size"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 111,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "win_type"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 111,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "window_size"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 165,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "win_type"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 165,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "window_size"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 296,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "win_type"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 296,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "window_size"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 401,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "win_type"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 401,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "window_size"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 486,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "win_type"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 486,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "window_size"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 575,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "win_type"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 575,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "window_size"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 656,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "win_type"
+      },
+      {
+        "file": "core\\indexers\\objects.py",
+        "line": 656,
+        "function": "get_window_bounds",
+        "kind": "phantom",
+        "name": "window_size"
+      },
+      {
+        "file": "core\\indexes\\base.py",
+        "line": 7837,
+        "function": "maybe_sequence_to_range",
+        "kind": "phantom",
+        "name": "names"
+      },
+      {
+        "file": "core\\indexes\\multi.py",
+        "line": 364,
+        "function": "_verify_integrity",
+        "kind": "phantom",
+        "name": "levels_to_validate"
+      },
+      {
+        "file": "core\\indexes\\multi.py",
+        "line": 1662,
+        "function": "_set_names",
+        "kind": "phantom",
+        "name": "values"
+      },
+      {
+        "file": "core\\internals\\blocks.py",
+        "line": 1035,
+        "function": "_unstack",
+        "kind": "phantom",
+        "name": "allow_fill"
+      },
+      {
+        "file": "core\\internals\\managers.py",
+        "line": 111,
+        "function": "interleaved_dtype",
+        "kind": "phantom",
+        "name": "blocks"
+      },
+      {
+        "file": "io\\formats\\css.py",
+        "line": 23,
+        "function": "_side_expander",
+        "kind": "phantom",
+        "name": "side"
+      },
+      {
+        "file": "io\\formats\\css.py",
+        "line": 219,
+        "function": "__call__",
+        "kind": "phantom",
+        "name": "declarations_str"
+      },
+      {
+        "file": "io\\formats\\style.py",
+        "line": 4216,
+        "function": "relative_luminance",
+        "kind": "phantom",
+        "name": "color"
+      },
+      {
+        "file": "io\\formats\\style_render.py",
+        "line": 625,
+        "function": "_translate_body",
+        "kind": "phantom",
+        "name": "sparsify_index"
+      },
+      {
+        "file": "io\\formats\\style_render.py",
+        "line": 2239,
+        "function": "_translate",
+        "kind": "phantom",
+        "name": "styler_data"
+      },
+      {
+        "file": "io\\formats\\style_render.py",
+        "line": 2239,
+        "function": "_translate",
+        "kind": "phantom",
+        "name": "uuid"
+      },
+      {
+        "file": "tseries\\frequencies.py",
+        "line": 568,
+        "function": "_maybe_coerce_freq",
+        "kind": "phantom",
+        "name": "source"
+      },
+      {
+        "file": "util\\_decorators.py",
+        "line": 227,
+        "function": "_format_argument_list",
+        "kind": "phantom",
+        "name": "allowed_args"
+      }
+    ]
+  },
+  "scipy": {
+    "stats": {
+      "files": 988,
+      "functions": 24004,
+      "with_param_docs": 1953,
+      "phantom": 27,
+      "undocumented": 1015
+    },
+    "phantom": [
+      {
+        "file": "conftest.py",
+        "line": 446,
+        "function": "skip_or_xfail_xp_backends",
+        "kind": "phantom",
+        "name": "backend"
+      },
+      {
+        "file": "conftest.py",
+        "line": 446,
+        "function": "skip_or_xfail_xp_backends",
+        "kind": "phantom",
+        "name": "cpu_only"
+      },
+      {
+        "file": "conftest.py",
+        "line": 446,
+        "function": "skip_or_xfail_xp_backends",
+        "kind": "phantom",
+        "name": "eager_only"
+      },
+      {
+        "file": "conftest.py",
+        "line": 446,
+        "function": "skip_or_xfail_xp_backends",
+        "kind": "phantom",
+        "name": "exceptions"
+      },
+      {
+        "file": "conftest.py",
+        "line": 446,
+        "function": "skip_or_xfail_xp_backends",
+        "kind": "phantom",
+        "name": "np_only"
+      },
+      {
+        "file": "conftest.py",
+        "line": 446,
+        "function": "skip_or_xfail_xp_backends",
+        "kind": "phantom",
+        "name": "reason"
+      },
+      {
+        "file": "interpolate\\tests\\test_fitpack2.py",
+        "line": 1228,
+        "function": "make_pair_grid",
+        "kind": "phantom",
+        "name": "dest_shape"
+      },
+      {
+        "file": "optimize\\_highspy\\_highs_wrapper.py",
+        "line": 9,
+        "function": "_highs_wrapper",
+        "kind": "phantom",
+        "name": "aindex"
+      },
+      {
+        "file": "optimize\\_highspy\\_highs_wrapper.py",
+        "line": 9,
+        "function": "_highs_wrapper",
+        "kind": "phantom",
+        "name": "astart"
+      },
+      {
+        "file": "optimize\\_highspy\\_highs_wrapper.py",
+        "line": 9,
+        "function": "_highs_wrapper",
+        "kind": "phantom",
+        "name": "avalue"
+      },
+      {
+        "file": "optimize\\_linprog_util.py",
+        "line": 91,
+        "function": "_check_sparse_inputs",
+        "kind": "phantom",
+        "name": "method"
+      },
+      {
+        "file": "optimize\\_linprog_util.py",
+        "line": 1314,
+        "function": "_postsolve",
+        "kind": "phantom",
+        "name": "lp"
+      },
+      {
+        "file": "optimize\\_linprog_util.py",
+        "line": 1314,
+        "function": "_postsolve",
+        "kind": "phantom",
+        "name": "revstack"
+      },
+      {
+        "file": "optimize\\_optimize.py",
+        "line": 204,
+        "function": "_prepare_scalar_function",
+        "kind": "phantom",
+        "name": "eps"
+      },
+      {
+        "file": "optimize\\_shgo_lib\\_vertex.py",
+        "line": 57,
+        "function": "star",
+        "kind": "phantom",
+        "name": "v"
+      },
+      {
+        "file": "signal\\_whittaker.py",
+        "line": 391,
+        "function": "_reml",
+        "kind": "phantom",
+        "name": "x"
+      },
+      {
+        "file": "sparse\\linalg\\_eigen\\_svds_doc.py",
+        "line": 1,
+        "function": "_svds_arpack_doc",
+        "kind": "phantom",
+        "name": "options"
+      },
+      {
+        "file": "sparse\\linalg\\_eigen\\_svds_doc.py",
+        "line": 129,
+        "function": "_svds_lobpcg_doc",
+        "kind": "phantom",
+        "name": "options"
+      },
+      {
+        "file": "sparse\\linalg\\_eigen\\_svds_doc.py",
+        "line": 254,
+        "function": "_svds_propack_doc",
+        "kind": "phantom",
+        "name": "options"
+      },
+      {
+        "file": "stats\\_distribution_infrastructure.py",
+        "line": 329,
+        "function": "draw",
+        "kind": "phantom",
+        "name": "squeezed_based_shape"
+      },
+      {
+        "file": "stats\\_distribution_infrastructure.py",
+        "line": 815,
+        "function": "draw",
+        "kind": "phantom",
+        "name": "domain"
+      },
+      {
+        "file": "stats\\_multivariate.py",
+        "line": 1848,
+        "function": "_logpdf",
+        "kind": "phantom",
+        "name": "detcol_spread"
+      },
+      {
+        "file": "stats\\_probability_distribution.py",
+        "line": 779,
+        "function": "kurtosis",
+        "kind": "phantom",
+        "name": "convention"
+      },
+      {
+        "file": "stats\\_probability_distribution.py",
+        "line": 1858,
+        "function": "ilogccdf",
+        "kind": "phantom",
+        "name": "x"
+      },
+      {
+        "file": "stats\\tests\\test_continuous_fit_censored.py",
+        "line": 269,
+        "function": "test_invgauss",
+        "kind": "phantom",
+        "name": "dispersion"
+      },
+      {
+        "file": "stats\\tests\\test_continuous_fit_censored.py",
+        "line": 269,
+        "function": "test_invgauss",
+        "kind": "phantom",
+        "name": "https"
+      },
+      {
+        "file": "stats\\tests\\test_discrete_basic.py",
+        "line": 279,
+        "function": "check_discrete_chisquare",
+        "kind": "phantom",
+        "name": "distname"
+      }
+    ]
+  },
+  "sklearn": {
+    "stats": {
+      "files": 671,
+      "functions": 11158,
+      "with_param_docs": 1665,
+      "phantom": 9,
+      "undocumented": 73
+    },
+    "phantom": [
+      {
+        "file": "linear_model\\_glm\\tests\\test_glm.py",
+        "line": 87,
+        "function": "glm_dataset",
+        "kind": "phantom",
+        "name": "model"
+      },
+      {
+        "file": "linear_model\\_glm\\tests\\test_glm.py",
+        "line": 87,
+        "function": "glm_dataset",
+        "kind": "phantom",
+        "name": "type"
+      },
+      {
+        "file": "linear_model\\tests\\test_ridge.py",
+        "line": 97,
+        "function": "ols_ridge_dataset",
+        "kind": "phantom",
+        "name": "type"
+      },
+      {
+        "file": "utils\\tests\\test_testing.py",
+        "line": 220,
+        "function": "f_bad_sections",
+        "kind": "phantom",
+        "name": "c"
+      },
+      {
+        "file": "utils\\tests\\test_testing.py",
+        "line": 258,
+        "function": "f_too_many_param_docstring",
+        "kind": "phantom",
+        "name": "c"
+      },
+      {
+        "file": "utils\\tests\\test_testing.py",
+        "line": 554,
+        "function": "f_two",
+        "kind": "phantom",
+        "name": "e"
+      },
+      {
+        "file": "utils\\tests\\test_testing.py",
+        "line": 580,
+        "function": "f_three",
+        "kind": "phantom",
+        "name": "e"
+      },
+      {
+        "file": "utils\\tests\\test_testing.py",
+        "line": 366,
+        "function": "predict",
+        "kind": "phantom",
+        "name": "y"
+      },
+      {
+        "file": "utils\\tests\\test_testing.py",
+        "line": 378,
+        "function": "score",
+        "kind": "phantom",
+        "name": "y"
+      }
+    ]
+  },
+  "streamlit": {
+    "stats": {
+      "files": 376,
+      "functions": 3415,
+      "with_param_docs": 486,
+      "phantom": 0,
+      "undocumented": 18
+    },
+    "phantom": []
+  },
+  "altair": {
+    "stats": {
+      "files": 55,
+      "functions": 2507,
+      "with_param_docs": 118,
+      "phantom": 3,
+      "undocumented": 12
+    },
+    "phantom": [
+      {
+        "file": "vegalite\\v6\\api.py",
+        "line": 3234,
+        "function": "transform_flatten",
+        "kind": "phantom",
+        "name": "as"
+      },
+      {
+        "file": "vegalite\\v6\\api.py",
+        "line": 3267,
+        "function": "transform_fold",
+        "kind": "phantom",
+        "name": "as"
+      },
+      {
+        "file": "vegalite\\v6\\api.py",
+        "line": 3439,
+        "function": "transform_quantile",
+        "kind": "phantom",
+        "name": "as"
+      }
+    ]
+  },
+  "PIL": {
+    "stats": {
+      "files": 97,
+      "functions": 1228,
+      "with_param_docs": 205,
+      "phantom": 1,
+      "undocumented": 13
+    },
+    "phantom": [
+      {
+        "file": "ImageStat.py",
+        "line": 32,
+        "function": "__init__",
+        "kind": "phantom",
+        "name": "image"
+      }
+    ]
+  },
+  "huggingface_hub": {
+    "stats": {
+      "files": 183,
+      "functions": 1937,
+      "with_param_docs": 399,
+      "phantom": 13,
+      "undocumented": 49
+    },
+    "phantom": [
+      {
+        "file": "_commit_api.py",
+        "line": 790,
+        "function": "_fetch_files_to_copy",
+        "kind": "phantom",
+        "name": "Returns"
+      },
+      {
+        "file": "_sandbox.py",
+        "line": 745,
+        "function": "run",
+        "kind": "phantom",
+        "name": "Returns"
+      },
+      {
+        "file": "file_download.py",
+        "line": 85,
+        "function": "are_symlinks_supported",
+        "kind": "phantom",
+        "name": "Returns"
+      },
+      {
+        "file": "hf_api.py",
+        "line": 7484,
+        "function": "get_discussion_details",
+        "kind": "phantom",
+        "name": "Returns"
+      },
+      {
+        "file": "hf_api.py",
+        "line": 7560,
+        "function": "create_discussion",
+        "kind": "phantom",
+        "name": "Returns"
+      },
+      {
+        "file": "hf_api.py",
+        "line": 7649,
+        "function": "create_pull_request",
+        "kind": "phantom",
+        "name": "Returns"
+      },
+      {
+        "file": "hf_api.py",
+        "line": 10214,
+        "function": "get_collection",
+        "kind": "phantom",
+        "name": "Returns"
+      },
+      {
+        "file": "hf_api.py",
+        "line": 10253,
+        "function": "create_collection",
+        "kind": "phantom",
+        "name": "Returns"
+      },
+      {
+        "file": "hf_api.py",
+        "line": 10327,
+        "function": "update_collection_metadata",
+        "kind": "phantom",
+        "name": "Returns"
+      },
+      {
+        "file": "hf_api.py",
+        "line": 10473,
+        "function": "add_collection_item",
+        "kind": "phantom",
+        "name": "Returns"
+      },
+      {
+        "file": "inference\\_common.py",
+        "line": 394,
+        "function": "raise_text_generation_error",
+        "kind": "phantom",
+        "name": "error"
+      },
+      {
+        "file": "lfs.py",
+        "line": 351,
+        "function": "_upload_single_part",
+        "kind": "phantom",
+        "name": "fileobj"
+      },
+      {
+        "file": "utils\\_cache_manager.py",
+        "line": 597,
+        "function": "scan_cache_dir",
+        "kind": "phantom",
+        "name": "Returns"
+      }
+    ]
+  }
+}
