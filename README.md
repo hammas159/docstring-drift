@@ -103,6 +103,74 @@ Google (`Args:`), NumPy (`Parameters\n----------`), and Sphinx (`:param name:`).
   trade: a false positive in a linter is far more costly than a miss.
 - **The scan covers installed source**, so results depend on the versions present.
 
+---
+
+## How it works
+
+```mermaid
+flowchart TD
+    A["any Python package"] --> B["ast.parse<br/>no imports, no execution"]
+    B --> C["for each function<br/>with a docstring"]
+    C --> D["documented_params()<br/>Google / NumPy / Sphinx"]
+    C --> E["signature_params()<br/>from the AST"]
+    D --> F{"compare"}
+    E --> F
+    F --> G["documented but absent<br/>= PHANTOM"]
+    F --> H["present but undocumented<br/>= weaker signal"]
+    G --> I{"function takes<br/>*args or **kwargs?"}
+    I -->|"yes"| J["skip - names may be<br/>passed through"]
+    I -->|"no"| K["report"]
+    style G fill:#dc2626,color:#fff
+    style K fill:#dc2626,color:#fff
+    style J fill:#94a3b8,color:#fff
+```
+
+---
+
+## Problems hit while building this
+
+**The first version reported roughly 400 phantom parameters in scipy alone, and almost
+none were real.** Finding and removing those was most of the work.
+
+| Problem | What happened | Fix |
+|---|---|---|
+| **Prose parsed as parameters** | `Default: None` inside a description matched the name pattern and became a parameter called `Default`. This alone caused most of the scipy noise | Track the indent of the first entry in a section; anything indented further is a description, not a name |
+| **Catch-all signatures** | `numpy.einsum` documents `dtype` and `casting`, both legitimately passed through `**kwargs`, and both were reported as phantom | Functions taking `*args`/`**kwargs` are exempt from phantom reporting |
+| **`self` / `cls` asymmetry** | Stripped from signatures but not from docstrings, so documenting `cls` looked like a phantom | Ignored on both sides |
+| **Trusting the first run** | The initial numbers looked publishable and were wrong | Spot-checked a finding against real source before writing any number down - which is how the pandas case was confirmed |
+
+After those fixes **scipy went from 434 to 27**. Every class has a regression test.
+
+---
+
+## Future work
+
+1. **Check types, not just names** - a docstring claiming `int` for a `str` parameter is
+   the same class of defect.
+2. **Detect stale descriptions**, not just stale names. That needs more than AST
+   comparison, and is where a language model would genuinely earn its place.
+3. **Recover recall on `**kwargs` APIs.** They are currently exempt, so drift in a
+   kwargs-heavy library is invisible. Resolving forwarded kwargs would close the gap.
+4. **Return values and raised exceptions** - `Returns:` and `Raises:` sections drift too.
+5. **Ship as a pre-commit hook and GitHub Action**, with a `--fail-under` threshold.
+6. **Scan the top 1,000 PyPI packages** to find out whether 1.40% is typical or whether
+   these eight happen to be unusual.
+7. **Correlate drift with commit history** to measure how long a docstring stays wrong.
+
+---
+
+## Stack
+
+`Python 3.11+` · `ast` (standard library) · `Streamlit` · `Altair` · `pandas` ·
+`pytest` · `ruff` · `GitHub Actions` - **zero runtime dependencies** for the scanner
+
+## Keywords
+
+docstring linter · documentation drift · stale documentation · Python AST · static
+analysis · code quality · documentation testing · pydocstyle alternative · darglint
+alternative · Google style docstrings · NumPy docstrings · Sphinx docstrings ·
+technical debt · pre-commit hook · CI linting · developer tooling
+
 ## Layout
 
 ```
