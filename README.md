@@ -1,81 +1,91 @@
-# docstring-drift
+<h1 align="center">docstring-drift</h1>
+<p align="center"><i>Documentation that quietly stopped being true</i></p>
 
-**101 documented parameters across eight major Python libraries do not exist on the
-function they describe.**
+<p align="center">
+  <a href="docs/RESULTS.md">Results</a> ·
+  <a href="docs/METHOD.md">Method</a> ·
+  <a href="docs/PROBLEMS.md">Problems hit</a> ·
+  <a href="docs/LIMITATIONS.md">Limitations</a> ·
+  <a href="docs/FUTURE.md">Future work</a> ·
+  <a href="#use-it">Use it</a>
+</p>
 
-Rename a parameter and nothing fails. No test breaks, no linter complains, no type
-checker objects — the docstring simply keeps describing a function that no longer
-exists. This finds those cases by comparing what a docstring *claims* the parameters
-are against what the signature *actually says*.
-
-Pure AST analysis: no imports, no execution, no model, no network. Safe to run over
-third-party code you did not write, and deterministic.
+<p align="center">
+  <a href="https://github.com/hammas159/docstring-drift/actions/workflows/ci.yml"><img src="https://github.com/hammas159/docstring-drift/actions/workflows/ci.yml/badge.svg" alt="ci"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/hammas159/docstring-drift" alt="license"></a>
+  <img src="https://img.shields.io/badge/python-3.11%2B-blue" alt="python">
+  <img src="https://img.shields.io/badge/tests-20%20passing-brightgreen" alt="tests">
+  <img src="https://img.shields.io/badge/runtime%20deps-zero-success" alt="zero dependencies">
+  <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/badge/lint-ruff-261230" alt="ruff"></a>
+</p>
 
 ---
 
-## Measured result
+> ### 101 documented parameters across eight major Python libraries do not exist on the function they describe.
 
-Scanned the installed source of eight widely used packages:
+Rename a parameter and nothing fails. No test breaks, no linter complains, no type checker
+objects — the docstring simply keeps describing a function that no longer exists.
 
-| Package | files | functions | documenting params | **phantom** | undocumented |
-|---|---|---|---|---|---|
-| pandas | 1,421 | 28,295 | 1,653 | **40** | 187 |
-| scipy | 988 | 24,004 | 1,953 | **27** | 1,015 |
-| huggingface_hub | 183 | 1,937 | 399 | **13** | 49 |
-| scikit-learn | 671 | 11,158 | 1,665 | **9** | 73 |
-| numpy | 407 | 11,215 | 761 | **8** | 258 |
-| altair | 55 | 2,507 | 118 | **3** | 12 |
-| PIL | 97 | 1,228 | 205 | **1** | 13 |
-| streamlit | 376 | 3,415 | 486 | **0** | 18 |
-| **Total** | **4,198** | **83,759** | **7,240** | **101** | **1,625** |
+This compares what a docstring **claims** the parameters are against what the signature
+**actually says**. Pure AST: no imports, no execution, no model, no network.
 
-**Phantom rate: 101 / 7,240 = 1.40%** of every function that documents its parameters.
+---
 
-### A verified example
+## The result
 
-`pandas/_testing/_io.py`, `round_trip_pickle`:
+| Package | functions | documenting params | **phantom** |
+|---|---:|---:|---:|
+| pandas | 28,295 | 1,653 | **40** |
+| scipy | 24,004 | 1,953 | **27** |
+| huggingface_hub | 1,937 | 399 | **13** |
+| scikit-learn | 11,158 | 1,665 | **9** |
+| numpy | 11,215 | 761 | **8** |
+| altair · PIL · streamlit | 7,150 | 809 | **4** |
+| **Total** | **83,759** | **7,240** | **101** |
+
+**Phantom rate: 1.40%** of every function that documents its parameters.
+
+📊 **[Full results, per-package breakdown, and a verified example →](docs/RESULTS.md)**
+
+---
+
+## A real one, from pandas
 
 ```python
-def round_trip_pickle(obj, tmp_path):     # <- parameter is tmp_path
+def round_trip_pickle(obj, tmp_path):          # parameter is tmp_path
     """
     Parameters
     ----------
-    obj : any object
-        The object to pickle and then re-read.
-    path : str, path object or file-like object, default None    # <- documents `path`
+    path : str, path object or file-like object, default None    # documents `path`
         The path where the pickled object is written and then read.
     """
 ```
 
-The parameter was renamed to `tmp_path`; the docstring still documents `path`. Nothing
-in the toolchain noticed.
+The parameter was renamed. The docstring was not. Nothing in the toolchain noticed.
 
 ---
 
-## What it reports
+## How it works
 
-**Phantom** — the docstring documents a name the signature does not contain. This is
-the headline: it is almost always a rename or a removal that the docs missed.
+```mermaid
+flowchart LR
+    A["any Python package"] --> B["ast.parse<br/>no imports, no execution"]
+    B --> C["documented_params()<br/>Google / NumPy / Sphinx"]
+    B --> D["signature_params()"]
+    C --> E{"compare"}
+    D --> E
+    E --> F["PHANTOM<br/>documented, absent"]
+    E --> G["undocumented<br/>weaker signal"]
+    F --> H{"*args or **kwargs?"}
+    H -->|"yes"| I["skip"]
+    H -->|"no"| J["report"]
 
-**Undocumented** — a real parameter with no entry in a docstring that documents the
-others. Reported separately and **never counted toward the phantom rate**, because
-omitting a parameter is frequently deliberate.
+    style F fill:#dc2626,color:#fff
+    style J fill:#dc2626,color:#fff
+    style I fill:#94a3b8,color:#fff
+```
 
----
-
-## False positives it does *not* produce
-
-The first version of this scanner reported **~400 phantom parameters in scipy alone**.
-Almost none were real. Each cause is now fixed, and each has a regression test:
-
-| Cause | Example | Fix |
-|---|---|---|
-| Prose parsed as a parameter | `Default: None` inside a description became a parameter called `Default` | parameter names sit at one indent; descriptions are indented further |
-| Catch-all signatures | `numpy.einsum` documents `dtype` and `casting`, both passed through `**kwargs` | functions with `*args`/`**kwargs` are exempt from phantom reporting |
-| `self` / `cls` | stripped from signatures but not from docstrings, so documenting `cls` looked phantom | ignored on both sides |
-
-After those fixes scipy went from **434 → 27**. The numbers in this README are the
-post-fix ones, and one finding was verified by hand against the source before publishing.
+🔍 **[How the parsing and comparison actually work →](docs/METHOD.md)**
 
 ---
 
@@ -83,98 +93,65 @@ post-fix ones, and one finding was verified by hand against the source before pu
 
 ```bash
 python src/drift.py <path>      # scan any directory of Python
-streamlit run ui/app.py         # interactive: pick packages, inspect findings
+streamlit run ui/app.py         # interactive dashboard
 pytest -q                       # 20 tests, no network
 ```
 
-It works as a CI check — it needs no dependencies beyond the standard library, imports
-nothing from the code it scans, and exits deterministically.
+It works as a CI check: **no dependencies beyond the standard library**, it imports
+nothing from the code it scans, and it exits deterministically.
 
-## Supported docstring styles
-
-Google (`Args:`), NumPy (`Parameters\n----------`), and Sphinx (`:param name:`).
-
-## Limitations
-
-- **Only parameter names.** It does not check types, descriptions, return values, or
-  whether a description is still accurate — those need more than AST comparison.
-- **`*args`/`**kwargs` functions are exempt from phantom detection**, so drift in a
-  `**kwargs`-heavy API is invisible here. That is a deliberate precision-over-recall
-  trade: a false positive in a linter is far more costly than a miss.
-- **The scan covers installed source**, so results depend on the versions present.
+<!-- Add a screenshot here once captured:
+![dashboard](docs/images/dashboard.png)
+-->
 
 ---
 
-## How it works
+## The numbers were wrong the first time
 
-```mermaid
-flowchart TD
-    A["any Python package"] --> B["ast.parse<br/>no imports, no execution"]
-    B --> C["for each function<br/>with a docstring"]
-    C --> D["documented_params()<br/>Google / NumPy / Sphinx"]
-    C --> E["signature_params()<br/>from the AST"]
-    D --> F{"compare"}
-    E --> F
-    F --> G["documented but absent<br/>= PHANTOM"]
-    F --> H["present but undocumented<br/>= weaker signal"]
-    G --> I{"function takes<br/>*args or **kwargs?"}
-    I -->|"yes"| J["skip - names may be<br/>passed through"]
-    I -->|"no"| K["report"]
-    style G fill:#dc2626,color:#fff
-    style K fill:#dc2626,color:#fff
-    style J fill:#94a3b8,color:#fff
-```
+The first version reported **~400 phantom parameters in scipy alone**, and almost none
+were real. Prose like `Default: None` inside a description was being parsed as a parameter
+named `Default`.
+
+After fixing that and two other false-positive classes, **scipy went 434 → 27**. Every
+class now has a regression test, and one finding was verified by hand against real source
+before any number was published.
+
+🛠 **[Every problem hit while building this, and how each was fixed →](docs/PROBLEMS.md)**
 
 ---
 
-## Problems hit while building this
+## Also worth reading
 
-**The first version reported roughly 400 phantom parameters in scipy alone, and almost
-none were real.** Finding and removing those was most of the work.
-
-| Problem | What happened | Fix |
-|---|---|---|
-| **Prose parsed as parameters** | `Default: None` inside a description matched the name pattern and became a parameter called `Default`. This alone caused most of the scipy noise | Track the indent of the first entry in a section; anything indented further is a description, not a name |
-| **Catch-all signatures** | `numpy.einsum` documents `dtype` and `casting`, both legitimately passed through `**kwargs`, and both were reported as phantom | Functions taking `*args`/`**kwargs` are exempt from phantom reporting |
-| **`self` / `cls` asymmetry** | Stripped from signatures but not from docstrings, so documenting `cls` looked like a phantom | Ignored on both sides |
-| **Trusting the first run** | The initial numbers looked publishable and were wrong | Spot-checked a finding against real source before writing any number down - which is how the pandas case was confirmed |
-
-After those fixes **scipy went from 434 to 27**. Every class has a regression test.
+| | |
+|---|---|
+| ⚠️ **[Limitations](docs/LIMITATIONS.md)** | What it deliberately does not detect, and why precision was chosen over recall |
+| 🚀 **[Future work](docs/FUTURE.md)** | Type checking, stale descriptions, `**kwargs` recall, pre-commit hook |
+| 📐 **[Method](docs/METHOD.md)** | Docstring styles supported, normalisation, comparison rules |
 
 ---
-
-## Future work
-
-1. **Check types, not just names** - a docstring claiming `int` for a `str` parameter is
-   the same class of defect.
-2. **Detect stale descriptions**, not just stale names. That needs more than AST
-   comparison, and is where a language model would genuinely earn its place.
-3. **Recover recall on `**kwargs` APIs.** They are currently exempt, so drift in a
-   kwargs-heavy library is invisible. Resolving forwarded kwargs would close the gap.
-4. **Return values and raised exceptions** - `Returns:` and `Raises:` sections drift too.
-5. **Ship as a pre-commit hook and GitHub Action**, with a `--fail-under` threshold.
-6. **Scan the top 1,000 PyPI packages** to find out whether 1.40% is typical or whether
-   these eight happen to be unusual.
-7. **Correlate drift with commit history** to measure how long a docstring stays wrong.
-
----
-
-## Stack
-
-`Python 3.11+` · `ast` (standard library) · `Streamlit` · `Altair` · `pandas` ·
-`pytest` · `ruff` · `GitHub Actions` - **zero runtime dependencies** for the scanner
-
-## Keywords
-
-docstring linter · documentation drift · stale documentation · Python AST · static
-analysis · code quality · documentation testing · pydocstyle alternative · darglint
-alternative · Google style docstrings · NumPy docstrings · Sphinx docstrings ·
-technical debt · pre-commit hook · CI linting · developer tooling
 
 ## Layout
 
 ```
 src/drift.py     parsing, comparison, scanning
-ui/app.py        Streamlit dashboard (scans live, nothing precomputed)
+ui/app.py        Streamlit dashboard - scans live, nothing precomputed
 tests/           20 tests, including one per false-positive class
+docs/            detailed documentation
+results/         measured output
 ```
+
+## Stack
+
+`Python 3.11+` · `ast` (standard library) · `Streamlit` · `Altair` · `pandas` · `pytest` ·
+`ruff` · `GitHub Actions` — **zero runtime dependencies** for the scanner itself
+
+## Keywords
+
+docstring linter · documentation drift · stale documentation · Python AST · static analysis ·
+code quality · documentation testing · pydocstyle alternative · darglint alternative ·
+Google style docstrings · NumPy docstrings · Sphinx docstrings · technical debt ·
+pre-commit hook · CI linting · developer tooling
+
+## Licence
+
+MIT — see [LICENSE](LICENSE).
