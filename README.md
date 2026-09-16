@@ -93,17 +93,26 @@ flowchart LR
 
 ```bash
 python src/drift.py <path>      # scan any directory of Python
-streamlit run ui/app.py         # interactive dashboard
 pytest -q                       # 20 tests, no network
 ```
 
 It works as a CI check: **no dependencies beyond the standard library**, it imports
 nothing from the code it scans, and it exits deterministically.
 
-![dashboard](docs/images/dashboard.png)
+---
 
-*Scanning this machine's own `site-packages`: 50,668 functions parsed across numpy,
-pandas and scikit-learn, 57 documented parameters that do not exist.*
+## Input
+
+Point it at any directory of Python. Here, an installed `numpy`.
+
+![input](docs/images/input.png)
+
+## Output
+
+![output](docs/images/output.png)
+
+*`genfromtxt` documents `skiprows` and `missing`. Neither is a parameter. The docstring
+even states that `skiprows` was removed in numpy 1.10 — and still lists it.*
 
 ---
 
@@ -135,7 +144,6 @@ before any number was published.
 
 ```
 src/drift.py     parsing, comparison, scanning
-ui/app.py        Streamlit dashboard - scans live, nothing precomputed
 tests/           20 tests, including one per false-positive class
 docs/            detailed documentation
 results/         measured output
@@ -143,7 +151,7 @@ results/         measured output
 
 ## Stack
 
-`Python 3.11+` · `ast` (standard library) · `Streamlit` · `Altair` · `pandas` · `pytest` ·
+`Python 3.11+` · `ast` (standard library) · `pandas` · `pytest` ·
 `ruff` · `GitHub Actions` — **zero runtime dependencies** for the scanner itself
 
 ## Keywords
