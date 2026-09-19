@@ -1,4 +1,4 @@
-<h1 align="center">docstring-drift</h1>
+<h1 align="center">docstring-drift (Python · stdlib AST · static analysis)</h1>
 <p align="center"><i>Documentation that quietly stopped being true</i></p>
 
 <p align="center">
